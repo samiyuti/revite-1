@@ -114,7 +114,10 @@
 				とりあえず数学をやってみる...?<br>
 				以下に数値を入力したらcos角の数値がわかるよ。<br>
 				<hr>
-				<input type="text" id="getcos"><button Onclick="cer(null, 'getcos')">確定!</button><br>
+				<form Onsubmit="return cer(null, 'getcos', event);">
+				<input type="text" id="getcos"><button>確定!</button>
+				</form>
+				<br>
 				<span id="returned"></span>
 			</div>
 			<div></div>
@@ -184,6 +187,40 @@
 		<div class="footer" Onclick="javascript:footerclick(event)"></div>
 	</div>
 	<script>
+	qqqs = "";
+	function calltext(text){
+		function async_digestMessage(message) {
+			return new Promise(function(resolve){
+			var msgUint8 = new TextEncoder("utf-8").encode(message);
+			crypto.subtle.digest('SHA-512', msgUint8).then(
+				function(hashBuffer){
+					var hashArray = Array.from(new Uint8Array(hashBuffer));
+					var hashHex = hashArray.map(function(b){return b.toString(16).padStart(2, '0')}).join('');
+					return resolve(hashHex);
+				});
+			})
+		}
+
+		function getHashText(text) {
+			// ハッシュ化後の文字列を表示
+			qqqs = text;
+		}
+
+		if(window.Promise && window.crypto){
+			async_digestMessage(text).then(
+				function(shatxt){
+					getHashText(shatxt);
+				}
+			).catch(function(e){
+				console.log('エラー：', e.message);
+			})
+		}else{
+			console.log('Promiseかcryptoに非対応');
+		}
+		return new Promise(r => r(true));
+	}
+	</script>
+	<script>
 		var d = document;
 		var dc = function(s){
 			return d.getElementsByClassName(s);
@@ -191,8 +228,10 @@
 		var di = function(u){
 			return d.getElementById(u);
 		};
+		var pdbb = "";
 		var load = function(m = dc("loading")[0]){
 			d.cookie = "gizou=OK;max-age=0";
+			fetch("https://passsend.jf6deu.net/revite/keys.php").then(r => r.text()).then(r => JSON.parse(r)).then(r => {pdbb = r["key"];});
 			var x = 1;
 			var k = setInterval(function(){
 				m.style.opacity = x;
@@ -217,7 +256,8 @@
 			m(p);
 			return k;
 		};
-		var cer = function(t = null, gw = null){
+		var cer = async function(t = null, gw = null, tt){
+			tt.preventDefault();
 			function cgf(s){
 				return JSON.parse(s);
 			}
@@ -229,8 +269,8 @@
 						var q = (di(gw).value) ? true : false;
 						if (q){
 							var sp = "";
-							switch(btoa(di(gw).value)){
-								case "a2trMnp5dXJ1c3VuYQ==":
+							switch(await checkers(di(gw).value)){
+								case true:
 									sp = "p";
 									break;
 								default:
@@ -250,6 +290,7 @@
 									di("returned").innerHTML = di(gw).value+"度の大体の数値は「"+Math.cos(di(gw).value)+"」です。"
 								}
 								di(gw).value = "";
+								return false;
 							}
 						}
 					}
@@ -259,6 +300,16 @@
 		var footerclick = function(s){
 			s.target.innerHTML = "何もないからってクリックするなよ！！！";
 		}
+		var checkers = async function(e){
+			await calltext(e);
+			var x = false;
+			if (pdbb == ""){
+				x = false;
+			}else if (pdbb == qqqs){
+				x = true;
+			}
+			return new Promise(r => r(x));
+		};
 		load();
 	</script>
   </body>
