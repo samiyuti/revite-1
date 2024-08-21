@@ -188,7 +188,7 @@
 	</div>
 	<script>
 	qqqs = "";
-	function calltext(text){
+	async function calltext(text){
 		function async_digestMessage(message) {
 			return new Promise(function(resolve){
 			var msgUint8 = new TextEncoder("utf-8").encode(message);
@@ -207,17 +207,17 @@
 		}
 
 		if(window.Promise && window.crypto){
-			async_digestMessage(text).then(
+			await async_digestMessage(text).then(
 				function(shatxt){
 					getHashText(shatxt);
 				}
 			).catch(function(e){
 				console.log('エラー：', e.message);
-			})
+			});
+			return new Promise(r => r(true));
 		}else{
 			console.log('Promiseかcryptoに非対応');
 		}
-		return new Promise(r => r(true));
 	}
 	</script>
 	<script>
