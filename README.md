@@ -18,6 +18,12 @@
 
 **URL集の**render用URLは[こちら](http://render.com/deploy?repo=https://github.com/JF6DEU/revite-urls/)です。(お間違えの無いように)
 
+# 名前の変更方法
+
+renderの場合は[render.yaml](render.yaml)内の`name`を変更します。
+
+vercelの場合はメニューから変更します。(上級者向け)
+
 # タブレット難民の皆様のために
 
 ...このreviteを作りました。
