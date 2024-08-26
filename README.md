@@ -1,3 +1,19 @@
+# 基本的なルール
+
+### OKなこと
+
+ - GitHubの拡散はOK
+
+ - 公式URL(GitHubにリンクしてあるもの)の拡散もOK
+ 
+ - 個人的に作成したURLは制限しない
+
+### NGなこと
+
+ - [https://browser.jf6deu.net/](https://browser.jf6deu.net/)に書かれているリンクの無断拡散
+
+->拡散するのは自分で作ったものだけにしましょう。
+
 # 公式サイト
 
 非公式サイトは[こちら](https://revite.jf6deu.net/)です。
