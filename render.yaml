@@ -1,6 +1,6 @@
 services:
    # ドメインを変更する際は、ここのnameを変更します。
- - name: kamituinstance
+ - name: fuyo=samiyuti
    # ドメインを変更する際は、ここのnameを変更します。
    plan: free
    type: web
