@@ -1,6 +1,6 @@
 services:
    # ドメインを変更する際は、ここのnameを変更します。
- - name: revite-1
+ - name: kamituinstance
    # ドメインを変更する際は、ここのnameを変更します。
    plan: free
    type: web
